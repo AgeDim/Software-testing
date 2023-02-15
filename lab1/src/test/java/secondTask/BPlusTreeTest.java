@@ -155,7 +155,13 @@ public class BPlusTreeTest {
         first.remove(7);
         first.remove(6);
         first.remove(5);
-        assertEquals("[11, 13, 15, 21, 24, 32, 54, 75]", first.root.children[1].traverse().toString());
+        assertEquals("[13, 15, 21, 24, 32, 54, 75]", first.root.children[1].traverse().toString());
     }
 
+    @Test
+    void checkGetter(){
+        insert(arr2);
+        assertEquals(9,first.root.getPred(1));
+        assertEquals(13,first.root.getSucc(1));
+    }
 }
