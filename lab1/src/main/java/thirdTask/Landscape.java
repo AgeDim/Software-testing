@@ -5,19 +5,21 @@ public class Landscape {
     private boolean vegetation;
     private float dustThickness;
 
+    public Landscape() {
+    }
+
     public Landscape(Ground ground, boolean vegetation, float dustThickness) {
         this.ground = ground;
         this.vegetation = vegetation;
         this.dustThickness = dustThickness;
     }
 
-    // Getters and setters for ground, vegetation, and dustThickness properties
-    public Ground getGround() {
-        return ground;
-    }
-
     public void setGround(Ground ground) {
         this.ground = ground;
+    }
+
+    public Ground getGround() {
+        return ground;
     }
 
     public boolean hasVegetation() {

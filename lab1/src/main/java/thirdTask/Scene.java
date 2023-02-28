@@ -1,17 +1,19 @@
 package thirdTask;
 
+import java.util.ArrayList;
+
 public class Scene {
     private Landscape landscape;
     private Temperature temperature;
-    private Figure[] figures;
+    private ArrayList<Figure> figures;
 
-    public Scene(Landscape landscape, Temperature temperature, Figure[] figures) {
+    public Scene(){}
+    public Scene(Landscape landscape, Temperature temperature, ArrayList<Figure> figures) {
         this.landscape = landscape;
         this.temperature = temperature;
         this.figures = figures;
     }
 
-    // Getters and setters for landscape, temperature, and figures properties
     public Landscape getLandscape() {
         return landscape;
     }
@@ -28,11 +30,11 @@ public class Scene {
         this.temperature = temperature;
     }
 
-    public Figure[] getFigures() {
+    public ArrayList<Figure> getFigures() {
         return figures;
     }
 
-    public void setFigures(Figure[] figures) {
+    public void setFigures(ArrayList<Figure> figures) {
         this.figures = figures;
     }
 }

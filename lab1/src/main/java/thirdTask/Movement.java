@@ -3,5 +3,6 @@ package thirdTask;
 public enum Movement {
     RUNNING,
     WALK,
-    WANDER
+    WANDER,
+    STAY
 }
