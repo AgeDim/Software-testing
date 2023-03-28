@@ -8,3 +8,6 @@
 /dataSources.local.xml
 
 .idea
+
+/lab1/target
+/lab2/target
