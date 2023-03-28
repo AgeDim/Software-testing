@@ -12,7 +12,6 @@ public class BPlusTreeTest {
     private BPlusTree first;
     private final int[] arr1 = {1, 7, 19, 24, 12, 6, 46, 5, 76, 13, 11};
     private final int[] arr2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 5, 5, 11, 13, 15, 21, 32, 24, 54, 75};
-    private final int[] arr3 = {1, 2, 3, 4, 5, 6, 7, 2, 2, 3};
 
 
     @BeforeEach

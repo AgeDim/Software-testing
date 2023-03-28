@@ -38,13 +38,8 @@ public class BPlusTreeNode {
                 System.out.printf("The key %d does not exist in the tree\n", key);
                 return;
             }
-            boolean flag = idx == num;
             System.out.println("children[idx].num:" + children[idx].num);
             System.out.println("MinDeg: " + MinDeg);
-            if (flag && idx > num)
-                children[idx - 1].remove(key);
-            else
-                children[idx].remove(key);
         }
     }
 
@@ -61,29 +56,17 @@ public class BPlusTreeNode {
         System.out.println("children[idx].num: " + children[idx].num);
         System.out.println("children[idx]: " + children[idx].traverse().toString());
         System.out.println("idx: " + idx);
-        if (children[idx].num >= MinDeg) {
-            keys[idx] = getPred(idx);
-            children[idx].remove(keys[idx]);
-        } else if (children[idx + 1].num >= MinDeg) {
-            keys[idx] = getSucc(idx);
-            children[idx + 1].remove(keys[idx]);
-        } else {
-            merge(idx);
-            children[idx].remove(key);
-        }
+        merge(idx);
+        children[idx].remove(key);
     }
 
     public int getPred(int idx) {
         BPlusTreeNode cur = children[idx];
-        while (!cur.isLeaf)
-            cur = cur.children[cur.num];
         return cur.keys[cur.num - 1];
     }
 
     public int getSucc(int idx) {
         BPlusTreeNode cur = children[idx + 1];
-        while (!cur.isLeaf)
-            cur = cur.children[0];
         return cur.keys[0];
     }
 
@@ -93,10 +76,6 @@ public class BPlusTreeNode {
         child.keys[MinDeg - 1] = keys[idx];
         for (int i = 0; i < sibling.num; ++i)
             child.keys[i + MinDeg] = sibling.keys[i];
-        if (!child.isLeaf) {
-            for (int i = 0; i <= sibling.num; ++i)
-                child.children[i + MinDeg] = sibling.children[i];
-        }
         for (int i = idx + 1; i < num; ++i)
             keys[i - 1] = keys[i];
         for (int i = idx + 2; i <= num; ++i)
@@ -115,8 +94,6 @@ public class BPlusTreeNode {
             keys[i + 1] = key;
             num = num + 1;
         } else {
-            while (i >= 0 && keys[i] > key)
-                i--;
             if (children[i + 1].num == 2 * MinDeg - 1) {
                 splitChild(i + 1, children[i + 1]);
                 if (keys[i + 1] < key)
@@ -137,11 +114,7 @@ public class BPlusTreeNode {
                 z.children[j] = y.children[j + MinDeg];
         }
         y.num = MinDeg - 1;
-        for (int j = num; j >= i + 1; j--)
-            children[j + 1] = children[j];
         children[i + 1] = z;
-        for (int j = num - 1; j >= i; j--)
-            keys[j + 1] = keys[j];
         keys[i] = y.keys[MinDeg - 1];
         num = num + 1;
     }
@@ -150,14 +123,8 @@ public class BPlusTreeNode {
         int i;
         result.clear();
         for (i = 0; i < num; i++) {
-            if (!isLeaf) {
-                result.addAll(children[i].traverse());
-            }
             result.add(keys[i]);
             System.out.printf(" %d", keys[i]);
-        }
-        if (!isLeaf) {
-            result.addAll(children[i].traverse());
         }
         return result;
     }
@@ -165,7 +132,6 @@ public class BPlusTreeNode {
     public BPlusTreeNode search(int key) {
         result.clear();
         int i = 0;
-        BPlusTreeNode tmp;
         while (i < num && key > keys[i]) {
             result.add(keys[i]);
             i++;
@@ -176,8 +142,6 @@ public class BPlusTreeNode {
         }
         if (isLeaf)
             return null;
-        tmp = children[i].search(key);
-        result.addAll(children[i].result);
-        return tmp;
+        return this;
     }
 }

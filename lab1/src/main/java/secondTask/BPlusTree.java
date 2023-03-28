@@ -64,8 +64,6 @@ public class BPlusTree {
         if (root.num == 0) {
             if (root.isLeaf)
                 root = null;
-            else
-                root = root.children[0];
         }
         return 1;
     }

@@ -75,6 +75,6 @@ public class SceneTest {
         assertThat(scene.getTemperature().getState()).isEqualTo(State.Cold);
         assertThat(scene.getFigures().size()).isEqualTo(5);
         assertThat(scene.getLandscape().getDustThickness()).isEqualTo(90);
-        assertThat(scene.getLandscape().hasVegetation()).isFalse();
+        assertThat(scene.getLandscape().hasVegetation()).isFalse() ;
     }
 }

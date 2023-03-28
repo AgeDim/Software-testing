@@ -35,6 +35,7 @@ public class LandScapeTest {
         landscape.setDustThickness(0.5F);
         assertThat(landscape.hasVegetation()).isTrue();
         assertThat(landscape.getDustThickness()).isEqualTo(0.5F);
+
     }
 
 }
