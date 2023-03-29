@@ -33,6 +33,12 @@ public class csvConverter {
         MathOfLab math = new MathOfLab();
         SystemMath system = new SystemMath(math);
         functionToCSV(math::sin, "sin");
+        functionToCSV(math::cos, "cos");
+        functionToCSV(math::tan, "tan");
+        functionToCSV(math::sec, "sec");
+        functionToCSV(math::cosec, "cosec");
+        functionToCSV(math::cotan, "cotan");
+        functionToCSV(math::ln, "ln");
         functionToCSV(system::calculateFunction, "system");
         functionToCSV(system::trigonometricFunction, "trigonometry");
         functionToCSV(system::logarithmicFunction, "logarithm");
