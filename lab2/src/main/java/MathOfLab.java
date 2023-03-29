@@ -1,11 +1,11 @@
 public class MathOfLab {
 
-    public double cos(double x) {
-        return Basic.cos(x);
+    public double sin(double x) {
+        return Basic.sin(x);
     }
 
-    public double sin(double x) {
-        return cos(Math.PI / 2 - x);
+    public double cos(double x) {
+        return 1 - 2 * sin(x / 2)* sin(x / 2);
     }
 
     public double tan(double x) {

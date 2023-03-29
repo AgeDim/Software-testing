@@ -32,7 +32,7 @@ public class csvConverter {
     public static void main(String[] args) throws IOException {
         MathOfLab math = new MathOfLab();
         SystemMath system = new SystemMath(math);
-        functionToCSV(math::cos, "cos");
+        functionToCSV(math::sin, "sin");
         functionToCSV(system::calculateFunction, "system");
         functionToCSV(system::trigonometricFunction, "trigonometry");
         functionToCSV(system::logarithmicFunction, "logarithm");

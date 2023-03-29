@@ -6,28 +6,29 @@ import org.mockito.Mockito;
 
 import java.util.stream.Stream;
 
-import static java.lang.Math.sqrt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BasicIntegrationTest {
 
-    SystemMath system = new SystemMath(new MathOfLab());
+    MathOfLab math = new MathOfLab();
+    SystemMath system = new SystemMath(math);
 
     @ParameterizedTest
-    @MethodSource("provideCosData")
-    void testFunctionDependingOnCosinus(double x, double cosX, double cosHalf, double expected) {
+    @MethodSource("provideSinData")
+    void testFunctionDependingOnSinus(double x, double sinX, double sinHalf, double expected) {
         try (MockedStatic<Basic> utils = Mockito.mockStatic(Basic.class)) {
-            utils.when(() -> Basic.cos(x)).thenReturn(cosX);
-            utils.when(() -> Basic.cos(x/2)).thenReturn(cosHalf);
+            utils.when(() -> Basic.sin(x)).thenReturn(sinX);
+            utils.when(() -> Basic.sin(x / 2)).thenReturn(sinHalf);
+
             assertEquals(expected, system.calculateFunction(x), BasicTest.ALLOWED_PRECISION);
         }
     }
 
-    static Stream<Arguments> provideCosData() {
+    static Stream<Arguments> provideSinData() {
         return Stream.of(
-                Arguments.of(-0.5, sqrt(3)/2, 0.965926, 5.260626214860996),
-                Arguments.of(-23, 0.84622, 0.87545, 12.1045),
-                Arguments.of(-Math.PI/4, -0.7071, 0.3827, -7.7763)
+                Arguments.of(-Math.PI / 6, -0.5, -0.2588, 4.27791),
+                Arguments.of(-23, 0.84622, 0.87545, 8.65142),
+                Arguments.of(-Math.PI / 4, -0.7071, 0.3827, 8.53688)
         );
     }
 
@@ -47,10 +48,11 @@ public class BasicIntegrationTest {
 
     static Stream<Arguments> provideLogData() {
         return Stream.of(
-                Arguments.of(0.5, -0.693, -3.478529378620244E-5),
-                Arguments.of(1.7, 0.5306, 2.1713457252143182E-7),
-                Arguments.of(5, 1.6094, 8419.78100069055)
+                Arguments.of(3, -0.693, 5.95164),
+                Arguments.of(0.9, 0.5306, 5.87844582374728E-6),
+                Arguments.of(5, 1.6094, 8419.78100)
         );
     }
+
 
 }

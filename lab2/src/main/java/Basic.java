@@ -1,28 +1,29 @@
-import static java.lang.Math.abs;
+import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Basic {
 
-    public static final double eps = 0.0000001;
+    public static final double PRECISION = 0.0000001;
 
-    public static double cos(double value) {
+    private static double sinTaylorMember(double x, int n) {
+        int sign = n % 2 == 0 ? 1 : -1;
+        double res = sign * Math.pow(x, 2 * n + 1);
+        return divideByFactorial(res, 2 * n + 1);
+    }
+
+    private static double divideByFactorial(double res, int n) {
+        for (int i = 1; i <= n; ++i) {
+            res /= i;
+        }
+        return res;
+    }
+
+    public static double sin(double value) {
         if (isSpecial(value)) {
             return Double.NaN;
         }
-        double s, an;
-        int n;
-        n = 0;
-        an = 1;
-        s = 0;
-        while (abs(an) > eps) {
-            s += an;
-            n++;
-            an *= -value * value / (2. * n - 1.0) / (2.0 * n);
-        }
-        return s;
-    }
-
-    public static boolean isSpecial(double x) {
-        return Double.isNaN(x) || Double.isInfinite(x);
+        return findSum(value, Basic::sinTaylorMember);
     }
 
     private static double lnTaylorMember(double x, int n) {
@@ -46,7 +47,7 @@ public class Basic {
         double prev = 0;
         double current = Double.MAX_VALUE;
         int n = 0;
-        while (Math.abs(current - prev) >= eps) {
+        while (Math.abs(current - prev) >= PRECISION) {
             prev = current;
             current = finder.calculate(value, n);
             result += current;
@@ -54,6 +55,10 @@ public class Basic {
         }
 
         return result;
+    }
+
+    public static boolean isSpecial(double x) {
+        return Double.isNaN(x) || Double.isInfinite(x);
     }
 
     interface FunctionMemberFinder {
