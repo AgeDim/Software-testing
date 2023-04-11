@@ -33,23 +33,12 @@ public class MapPageTest {
         browserDrivers.closeBrowser();
     }
 
-    @BeforeEach
-    @AfterEach
-    public void timeOut() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
-    }
-
     @Test
     @DisplayName("Temp button click test")
     public void TempButtonClickTest() {
         mapPageMap.forEach((key, mapPage) -> {
             mapPage.TempBtnClick();
             assertEquals(mapPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/eur/temp/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -59,11 +48,6 @@ public class MapPageTest {
         mapPageMap.forEach((key, mapPage) -> {
             mapPage.WindBtnClick();
             assertEquals(mapPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/eur/wind/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -73,11 +57,6 @@ public class MapPageTest {
         mapPageMap.forEach((key, mapPage) -> {
             mapPage.CloudBtnClick();
             assertEquals(mapPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/eur/clou/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -88,11 +67,6 @@ public class MapPageTest {
         mapPageMap.forEach((key, mapPage) -> {
             mapPage.AllergyBtnClick();
             assertEquals(mapPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/allergy/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -100,12 +74,7 @@ public class MapPageTest {
     @DisplayName("Select Dalniy Vostok test")
     public void SelectRegion1Test() {
         mapPageMap.forEach((key, mapPage) -> {
-            try {
-                mapPage.selectRegion(1);
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            mapPage.selectRegion(1);
             assertEquals(mapPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/feru/prc/");
         });
     }
@@ -114,12 +83,7 @@ public class MapPageTest {
     @DisplayName("Select Sibir test")
     public void SelectRegion2Test() {
         mapPageMap.forEach((key, mapPage) -> {
-            try {
-                mapPage.selectRegion(0);
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            mapPage.selectRegion(0);
             assertEquals(mapPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/sib/prc/");
         });
     }

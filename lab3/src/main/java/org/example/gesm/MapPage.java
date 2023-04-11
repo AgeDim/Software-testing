@@ -31,9 +31,8 @@ public class MapPage {
         this.webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    public void selectRegion(Integer index) throws InterruptedException {
+    public void selectRegion(Integer index){
         webDriver.findElement(By.xpath("/html/body/header/div[2]/div[2]/div/div/div[1]")).click();
-        TimeUnit.SECONDS.sleep(2);
         List<WebElement> elements = webDriver.findElements(By.xpath("/html/body/header/div[2]/div[2]/div/div/div[2]/a"));
         elements.get(index).click();
     }

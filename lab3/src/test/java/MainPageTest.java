@@ -3,8 +3,11 @@ import org.example.driver.BrowserDrivers;
 import org.example.gesm.MainPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -32,23 +35,12 @@ public class MainPageTest {
         browserDrivers.closeBrowser();
     }
 
-    @BeforeEach
-    @AfterEach
-    public void timeOut() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
-    }
-
     @Test
     @DisplayName("News button click test")
     public void NewsButtonClickTest() {
         mainPageMap.forEach((key, mainPage) -> {
             mainPage.NewsBtnClick();
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -58,11 +50,6 @@ public class MainPageTest {
         mainPageMap.forEach((key, mainPage) -> {
             mainPage.MapsBtnClick();
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/maps/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -72,11 +59,6 @@ public class MainPageTest {
         mainPageMap.forEach((key, mainPage) -> {
             mainPage.InformsBtnClick();
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/informers/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -86,11 +68,6 @@ public class MainPageTest {
         mainPageMap.forEach((key, mainPage) -> {
             mainPage.AppsBtnClick();
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/soft/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -98,12 +75,9 @@ public class MainPageTest {
     @DisplayName("Search city weather test")
     public void SearchInputTest() {
         mainPageMap.forEach((key, mainPage) -> {
-            try {
-                mainPage.SearchInputClick("Алматы");
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            mainPage.SearchInputClick("Алматы");
+            new WebDriverWait(mainPage.getWebDriver(), Duration.ofSeconds(25)).until(ExpectedConditions.urlContains(
+                    "https://www.gismeteo.ru/weather-almaty-5205/"));
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/weather-almaty-5205/");
         });
     }
@@ -112,19 +86,12 @@ public class MainPageTest {
     @DisplayName("Switch city weather test")
     public void EditCityButtonClickTest() {
         mainPageMap.forEach((key, mainPage) -> {
-            try {
-                mainPage.EditCityBtnClick();
-                WebElement input = mainPage.getWebDriver().findElement(By.xpath(
-                        "/html/body/section/div/section/form/div/label[3]/span/span[2]/span/input"));
-                input.sendKeys("Алматы");
-                TimeUnit.SECONDS.sleep(2);
-                mainPage.getWebDriver().findElement(By.xpath(
-                        "/html/body/section/div/section/form/div/label[3]/span/span[2]/div/div/div[2]/div[1]")
-                ).click();
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            mainPage.EditCityBtnClick();
+            WebElement input = mainPage.getWebDriver().findElement(By.xpath(
+                    "/html/body/section/div/section/form/div/label[3]/span/span[2]/span/input"));
+            input.sendKeys("Алматы");
+            mainPage.getWebDriver().findElement(By.xpath(
+                    "/html/body/section/div/section/form/div/label[3]/span/span[2]/div/div/div[2]/div[1]")).click();
             assertEquals(mainPage.getCityText(), "Алматы");
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/");
         });

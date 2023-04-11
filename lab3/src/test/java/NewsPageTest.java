@@ -34,11 +34,6 @@ public class NewsPageTest {
         browserDrivers.closeBrowser();
     }
 
-    @BeforeEach
-    @AfterEach
-    public void timeOut() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
-    }
 
     @Test
     @DisplayName("Animal button click test")
@@ -46,11 +41,6 @@ public class NewsPageTest {
         newsPageMap.forEach((key, newsPage) -> {
             newsPage.AnimalBtnClick();
             assertEquals(newsPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/animals/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -60,11 +50,6 @@ public class NewsPageTest {
         newsPageMap.forEach((key, newsPage) -> {
             newsPage.AutoBtnClick();
             assertEquals(newsPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/auto/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -74,11 +59,6 @@ public class NewsPageTest {
         newsPageMap.forEach((key, newsPage) -> {
             newsPage.CovidBtnClick();
             assertEquals(newsPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/coronavirus/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -88,11 +68,6 @@ public class NewsPageTest {
         newsPageMap.forEach((key, newsPage) -> {
             newsPage.ScienceBtnClick();
             assertEquals(newsPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/science/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -102,11 +77,6 @@ public class NewsPageTest {
         newsPageMap.forEach((key, newsPage) -> {
             newsPage.NatureBtnClick();
             assertEquals(newsPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/nature/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 
@@ -116,11 +86,6 @@ public class NewsPageTest {
         newsPageMap.forEach((key, newsPage) -> {
             newsPage.WeatherBtnClick();
             assertEquals(newsPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/news/weather/");
-            try {
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         });
     }
 }

@@ -5,7 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class MainPage {
@@ -32,6 +35,9 @@ public class MainPage {
 
     @FindBy(xpath = "/html/body/section/div[1]/section[1]/div[1]/div/div[1]/a[1]")
     private WebElement CityText;
+
+    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/div[2]/div/div[2]/a[1]")
+    private WebElement FirstEqualsValue;
 
 
     public MainPage(WebDriver webDriver) {
@@ -68,10 +74,10 @@ public class MainPage {
         EditCityBtn.click();
     }
 
-    public void SearchInputClick(String name) throws InterruptedException {
+    public void SearchInputClick(String name){
         searchInput.sendKeys(name);
-        TimeUnit.SECONDS.sleep(2);
-        searchInput.sendKeys(Keys.ENTER);
+        new WebDriverWait(webDriver, Duration.ofSeconds(20)).until(ExpectedConditions.elementToBeClickable(FirstEqualsValue));
+        FirstEqualsValue.click();
     }
 
 
