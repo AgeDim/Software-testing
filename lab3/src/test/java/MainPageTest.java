@@ -3,16 +3,12 @@ import org.example.driver.BrowserDrivers;
 import org.example.gesm.MainPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MainPageTest {
 
@@ -113,7 +109,7 @@ public class MainPageTest {
     }
 
     @Test
-    @DisplayName("Apps button click test")
+    @DisplayName("Switch city weather test")
     public void EditCityButtonClickTest() {
         mainPageMap.forEach((key, mainPage) -> {
             try {
