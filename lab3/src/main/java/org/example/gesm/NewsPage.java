@@ -10,22 +10,22 @@ import java.util.concurrent.TimeUnit;
 public class NewsPage {
     private final WebDriver webDriver;
 
-    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/a[1]")
+    @FindBy(xpath = "//a[@href='/news/auto/']")
     private WebElement AutoBtn;
 
-    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/a[2]")
+    @FindBy(xpath = "//a[@href='/news/science/']")
     private WebElement ScienceBtn;
 
-    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/a[3]")
+    @FindBy(xpath = "//a[@href='/news/nature/']")
     private WebElement NatureBtn;
 
-    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/a[4]")
+    @FindBy(xpath = "//a[@href='/news/coronavirus/']")
     private WebElement CovidBtn;
 
-    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/a[5]")
+    @FindBy(xpath = "//a[@href='/news/animals/']")
     private WebElement AnimalBtn;
 
-    @FindBy(xpath = "/html/body/header/div[2]/div[2]/div/div/a[6]")
+    @FindBy(xpath = "//a[@href='/news/weather/']")
     private WebElement WeatherBtn;
 
     public NewsPage(WebDriver webDriver) {

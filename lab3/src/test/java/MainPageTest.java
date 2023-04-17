@@ -88,10 +88,18 @@ public class MainPageTest {
         mainPageMap.forEach((key, mainPage) -> {
             mainPage.EditCityBtnClick();
             WebElement input = mainPage.getWebDriver().findElement(By.xpath(
-                    "/html/body/section/div/section/form/div/label[3]/span/span[2]/span/input"));
+                    "//input[@type='search']"));
+            new WebDriverWait(mainPage.getWebDriver(), Duration.ofSeconds(25)).until(ExpectedConditions.elementToBeClickable(input));
             input.sendKeys("Алматы");
-            mainPage.getWebDriver().findElement(By.xpath(
-                    "/html/body/section/div/section/form/div/label[3]/span/span[2]/div/div/div[2]/div[1]")).click();
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            WebElement accept = mainPage.getWebDriver().findElement(By.xpath(
+                    "//div[@data-id='5205']"));
+            new WebDriverWait(mainPage.getWebDriver(), Duration.ofSeconds(25)).until(ExpectedConditions.elementToBeClickable(accept));
+            accept.click();
             assertEquals(mainPage.getCityText(), "Алматы");
             assertEquals(mainPage.getWebDriver().getCurrentUrl(), "https://www.gismeteo.ru/");
         });
